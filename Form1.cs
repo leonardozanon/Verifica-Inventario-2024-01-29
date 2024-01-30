@@ -9,9 +9,9 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
         public Form1()
         {
             InitializeComponent();
-            PopolaTabella();
+            PopolaTabella("");
         }
-        private void PopolaTabella()
+        private void PopolaTabella(string q)
         {
             dataGridView1.Rows.Clear();
             MySqlConnection connessione = new MySqlConnection(ConnectionString);
@@ -25,10 +25,11 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
                 while (dr.Read())
                 {
                     dataGridView1.Rows.Add(
+                        dr.GetInt32("id").ToString(),
                         dr.GetString("CodiceFarnell"),
                         dr.GetString("CodiceProduttore"),
-                        dr.GetString("Quantit‡"),
-                        dr.GetInt32("Prezzo").ToString()
+                        dr.GetString("Quantit√†"),
+                        dr.GetDecimal("Prezzo").ToString()
                     );
                 }
 
@@ -48,11 +49,12 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
 
             formModifica.ShowDialog();
 
-            PopolaTabella();
+            PopolaTabella("");
         }
 
         private void buttonCerca_Click(object sender, EventArgs e)
         {
+            /*
             dataGridView1.Rows.Clear();
 
             MySqlConnection cnn = new MySqlConnection(ConnectionString);
@@ -63,7 +65,7 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
 
                 string query = $"SELECT * FROM prodotti WHERE CodiceFarnell LIKE '%{cerca}%' " +
                     $"OR Descrizione LIKE '%{cerca}%' OR Produttore LIKE '%{cerca}%' OR CodiceProduttore LIKE '%{cerca}%' " +
-                   $"OR Quantit‡ LIKE '%{cerca}%' OR Prezzo LIKE '%{cerca}%'";
+                   $"OR Quantit√† LIKE '%{cerca}%' OR Prezzo LIKE '%{cerca}%'";
 
                 MySqlCommand cmd = new MySqlCommand(query, cnn);
 
@@ -72,10 +74,11 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
                 while (reader.Read())
                 {
                     dataGridView1.Rows.Add(
+                        reader.GetInt32("id").ToString(),
                         reader.GetString("CodiceFarnell"),
                         reader.GetString("CodiceProduttore"),
-                        reader.GetString("Quantit‡"),
-                        reader.GetInt32("Prezzo").ToString()
+                        reader.GetString("Quantit√†"),
+                        reader.GetDecimal("Prezzo").ToString()
                     );
                 }
 
@@ -85,6 +88,7 @@ namespace Verifica_Zanon_Leonardo_2024_01_29
             {
                 MessageBox.Show("impossibile connettersi");
             }
+            */
         }
     }
 }
